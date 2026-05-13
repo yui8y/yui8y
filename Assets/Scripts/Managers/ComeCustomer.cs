@@ -12,21 +12,13 @@ public class ComeCustomer : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, target.position) > 0.1f)
+        if (Vector2.Distance(transform.position, target.position) > 1f)
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
                 target.position,
                 speed * Time.deltaTime
             );
-        }
-    }
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            Debug.Log("会話開始！");
         }
     }
 

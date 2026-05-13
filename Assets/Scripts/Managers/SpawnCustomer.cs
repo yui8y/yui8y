@@ -14,8 +14,10 @@ public class SpawnCustomer : MonoBehaviour
 
     void CustomerSpawn()
     {
-        if (GameManager.instance.customerExists)
-        return;
+        if (GameManager.instance.customerExists == true)
+        {
+            return;
+        }
 
         int randomIndex = Random.Range(0, customerPrefabs.Length);
 
