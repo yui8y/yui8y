@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class CounterInteraction : MonoBehaviour
 {
+
+    public TalkDataSO talkData;
     bool playerNear = false;
 
     void Update()
     {
         if(playerNear && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            GameManager.instance.dialogueUI.SetActive(true);
-
-            GameManager.instance.dialogueText.text = "いらっしゃいませ、ご注文はいかがいたしますか?";
+            DialogueManager.instance.StartTalk(talkData);
         }
     }
 

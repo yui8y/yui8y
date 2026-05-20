@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject dialogueUI;
     public TextMeshProUGUI dialogueText;
 
+
     
     void Awake()
     {
@@ -41,6 +42,5 @@ public class GameManager : MonoBehaviour
     {
         money_txt.text = "総資産 " + money + "円";
     }
-
 
 }

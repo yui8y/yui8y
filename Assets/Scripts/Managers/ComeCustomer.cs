@@ -12,7 +12,7 @@ public class ComeCustomer : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, target.position) > 1f)
+        if (Vector2.Distance(transform.position, target.position) > 0.1f)
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
