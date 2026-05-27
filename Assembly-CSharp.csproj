@@ -55,8 +55,13 @@
     <Compile Include="Assets\Scripts\Managers\ComeCustomer.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CounterInteraction.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\Managers\MakingManager.cs" />
     <Compile Include="Assets\Scripts\UI\make_coffee.cs" />
+    <Compile Include="Assets\Resources\DialogueData.cs" />
+    <Compile Include="Assets\Resources\GameData.cs" />
     <Compile Include="Assets\Scripts\UI\OnMouseDownSwitchScene.cs" />
+    <Compile Include="Assets\Scripts\Managers\CSVLoader.cs" />
     <Compile Include="Assets\Resources\TalkLine.cs" />
     <Compile Include="Assets\Scripts\Managers\TextController.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogueManager.cs" />

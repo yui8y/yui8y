@@ -3,6 +3,8 @@ using UnityEngine;
 public class SpawnCustomer : MonoBehaviour
 {
     public GameObject[] customerPrefabs;
+    public string[] customerCharIds;  // prefabsと同じ順番でcharIdを入力する
+
     public Transform spawnPoint;
 
     public float spawnInterval = 5f;
@@ -20,6 +22,7 @@ public class SpawnCustomer : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, customerPrefabs.Length);
+        GameData.currentCharId = customerCharIds[randomIndex];  // charIdを保存！
 
         Instantiate(
             customerPrefabs[randomIndex],

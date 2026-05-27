@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public bool customerExists = false;
     
     //資金管理
-    public int money = 0;
     public TextMeshProUGUI money_txt;
 
     //ダイアログ管理
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-        money_txt.text = "総資産 " + money + "円";
+        money_txt.text = "総資産 " + GameData.money + "円";
     }
 
 }

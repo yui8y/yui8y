@@ -12,16 +12,20 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI messageText;
 
-    public TalkDataSO currentTalk;
+    private DialogueNode currentNode;        // 今表示中のノード
+    private string fullText;                 // タイプライター用の全文保持
 
+    // 会話終了時に発火するイベント
+    public System.Action onEndTalk;
 
     public float typingSpeed = 0.05f;
 
     bool isTyping = false;
-
-
-    int currentLine = 0;
     bool isTalking = false;
+    public bool IsTalking
+    {
+        get { return isTalking; }
+    }
 
     //文字テキスト
     System.Collections.IEnumerator TypeSentence(string sentence)
@@ -47,13 +51,19 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(isTalking && Keyboard.current.eKey.wasPressedThisFrame){
-            if(isTyping == true)
+        // E・スペース・クリックのどれかを判定
+        bool isAdvanceInput =
+            Keyboard.current.eKey.wasPressedThisFrame
+            || Keyboard.current.spaceKey.wasPressedThisFrame
+            || Mouse.current.leftButton.wasPressedThisFrame;
+
+        if (isTalking && isAdvanceInput)
+        {
+            if (isTyping)
             {
+                // タイピング中なら全文スキップ表示
                 StopAllCoroutines();
-
-                messageText.text = currentTalk.lines[currentLine].message;
-
+                messageText.text = fullText;  // currentTalk→fullTextに変更
                 isTyping = false;
                 return;
             }
@@ -62,38 +72,36 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartTalk(TalkDataSO talkData)
+    public void StartTalk(DialogueNode startNode)
     {
-        currentTalk = talkData;
-
-        currentLine = 0;
+        currentNode = startNode;   // 最初のノードをセット
         isTalking = true;
-
         dialoguePanel.SetActive(true);
-
         ShowLine();
     }
 
     void ShowLine()
     {
-        TalkLine line = currentTalk.lines[currentLine];
-
-        nameText.text = line.speaker;
+        nameText.text = currentNode.speaker;  // 話者名をセット
+        fullText = currentNode.text;          // 全文を保持しておく
 
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(line.message));
+        StartCoroutine(TypeSentence(fullText)); // タイプライター開始
     }
 
     void NextLine()
     {
-        currentLine++;
-
-        if(currentLine >= currentTalk.lines.Count)
+        // nextNodeIdがnullか"null"なら会話終了
+        if (string.IsNullOrEmpty(currentNode.nextNodeId) 
+            || currentNode.nextNodeId == "null")
         {
             EndTalk();
             return;
         }
 
+        // CSVLoaderから次のノードを取得して進む
+        currentNode = CSVLoader.GetNode(currentNode.nextNodeId);
+        Debug.Log("次のノード: " + currentNode?.nodeId); // 追加、nullなら"null"と表示される
         ShowLine();
     }
 
@@ -103,6 +111,8 @@ public class DialogueManager : MonoBehaviour
 
         dialoguePanel.SetActive(false);
 
-        Debug.Log("会話終了！");
+        onEndTalk?.Invoke();  // 登録されてる処理があれば呼ぶ（なければ何もしない）
+
+        Debug.Log("会話終了！ isTalking = " + isTalking);
     }
 }
