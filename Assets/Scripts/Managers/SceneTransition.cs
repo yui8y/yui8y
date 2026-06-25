@@ -1,7 +1,8 @@
-using System.Collections;          // IEnumeratorを使うために必要
-using UnityEngine;                  // MonoBehaviourを使うために必要
-using UnityEngine.SceneManagement;  // SceneManagerを使うために必要
-using UnityEngine.UI;               // Imageを使うために必要
+using System.Collections;         
+using UnityEngine;                  
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class SceneTransition : MonoBehaviour
 {
@@ -10,13 +11,19 @@ public class SceneTransition : MonoBehaviour
     public Image fadeImage;          // 黒いパネルのImageコンポーネント
     public float fadeDuration = 1f;  // フェードにかかる秒数
 
+    public System.Action onFadeInComplete;
+
+
     void Awake()
     {
         instance = this;             // 自分自身を登録
+        Debug.Log("SceneTransition起動！ instance = " + instance);
+
     }
 
     void Start()
     {
+        Debug.Log("SceneTransition.instance = " + SceneTransition.instance);
         if (GameData.shouldFadeIn)
         {
             GameData.shouldFadeIn = false;  // フラグをリセット
@@ -62,5 +69,8 @@ public class SceneTransition : MonoBehaviour
         }
 
         fadeImage.color = new Color(0, 0, 0, 0f);  // 完全に透明にする
+        onFadeInComplete?.Invoke();  // フェードイン完了を通知！
+
     }
+
 }

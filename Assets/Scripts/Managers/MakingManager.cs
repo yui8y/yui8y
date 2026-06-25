@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+
 
 public class MakingManager : MonoBehaviour
 {
     public static MakingManager instance;
+    public SpriteRenderer overlayImage;  // InspectorでOverlayのImageをセット
+    public GameObject annotationLayer;  // InspectorでAnnotationLayerをセット
+
+
 
     // フェーズの種類
     public enum Phase
@@ -20,7 +27,9 @@ public class MakingManager : MonoBehaviour
 
     void Start()
     {
-        EnterAnalysisPhase();  // シーン開始時に分析フェーズから始める
+        //EnterAnalysisPhase();  // シーン開始時に分析フェーズから始める
+        overlayImage.color = new Color(0.04f, 0.08f, 0.2f, 0f);  // 最初は透明
+        SceneTransition.instance.onFadeInComplete += OnFadeInComplete;
     }
 
     // 分析フェーズに入る
@@ -29,7 +38,7 @@ public class MakingManager : MonoBehaviour
         currentPhase = Phase.Analysis;          // フェーズをAnalysisに設定
         Debug.Log("分析フェーズ開始！charId: " + GameData.currentCharId);
         // テスト用：とりあえずnode_002から会話を直接起動
-        EnterDialoguePhase("node_002");
+        //EnterDialoguePhase("node_002");
         // ここに分析フェーズのUI表示処理を後で追加
     }
 
@@ -40,5 +49,20 @@ public class MakingManager : MonoBehaviour
 
         DialogueNode node = CSVLoader.GetNode(startNodeId);  // ノードを取得
         DialogueManager.instance.StartTalk(node);             // 会話開始
+    }
+
+
+    void OnFadeInComplete()
+    {
+        annotationLayer.SetActive(true);  // アノテーションを表示
+
+        overlayImage.DOFade(0.7f, 0.5f)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() => EnterAnalysisPhase());
+    }
+
+    void OnDisable()
+    {
+        SceneTransition.instance.onFadeInComplete -= OnFadeInComplete;  // 登録解除
     }
 }
