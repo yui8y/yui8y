@@ -5,9 +5,10 @@ node_003, npc_01, ミクル, ……ん?ああ、目?, null, null, 0, node_004
 node_004, npc_01, ミクル, 気に入ってんだよね、自分でも。, null, null, 0, node_005
 node_005, npc_01, ミクル, ほら、桜みたいでカッコよくない? ぴんぴかでさ, 桜, Nomal, 2, node_006
 node_006, npc_01, トワ, サクラ、ですか?, null, null, 0, node_007
-node_007, npc_01, ミクル, そうそう……もしかして、桜を知らない感じ?, null, null, 0, node_008
-node_008, npc_01, トワ, データとして存在を認識しておりますが……実物を見たことはございません。, null, null, 0, node_009
-node_009, npc_01, ミクル, ひゃぁ、さすがアンドロイドって感じ。好きだよ、そういうヤツ。, null, null, 0, node_010
-node_010, npc_01, ミクル, じゃ、ウチが暇だったら見せたげる。桜。, null, null, 0, node_011
-node_011, npc_01, トワ, お気遣い、感謝いたします。, null, null, 0, node_012
-node_012, npc_01, トワ, (このお客さん、こんなにしゃべる人だったんだ), null, null, 0, null
+node_007, npc_01, ミクル, そうそう。ほら、春に咲くアレ。, null, null, 0, node_008
+node_008, npc_01, ミクル, ……待って。もしかして、桜を知らない感じ?, null, null, 0, node_009
+node_009, npc_01, トワ, データとして存在を認識しておりますが……実物を見たことはございません。, null, null, 0, node_010
+node_010, npc_01, ミクル, ふーん。, null, null, 0, node_011
+node_011, npc_01, ミクル, じゃ、春楽しみだね。, null, null, 0, node_012
+node_012, npc_01, トワ, そうですか？, null, null, 0, node_013
+node_013, npc_01, トワ, おう。, null, null, 0, nul
