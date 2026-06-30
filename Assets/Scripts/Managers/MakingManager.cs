@@ -7,8 +7,7 @@ public class MakingManager : MonoBehaviour
 {
     public static MakingManager instance;
     public SpriteRenderer overlayImage;  // InspectorでOverlayのImageをセット
-    public GameObject annotationLayer;  // InspectorでAnnotationLayerをセット
-
+    public GameObject[] annotationParts;
 
 
     // フェーズの種類
@@ -54,7 +53,16 @@ public class MakingManager : MonoBehaviour
 
     void OnFadeInComplete()
     {
-        annotationLayer.SetActive(true);  // アノテーションを表示
+
+        // 部位ごとに0.1秒ずつタイミングをずらして表示
+        for (int i = 0; i < annotationParts.Length; i++)
+        {
+            int index = i;  // ラムダ式内で正しいiを使うためにキャプチャ
+            DOVirtual.DelayedCall(
+                i * 0.1f,                                    // i番目は i*0.1秒後に実行
+                () => annotationParts[index].SetActive(true) // 該当部位を表示
+            );
+        }
 
         overlayImage.DOFade(0.7f, 0.5f)
             .SetEase(Ease.OutCubic)

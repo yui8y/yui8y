@@ -57,7 +57,7 @@ public class AnnotationPart : MonoBehaviour
 
         // ③ シーケンス終了後にタイプライターを呼ぶ
         seq.OnComplete(() => 
-        MakingManager.instance.StartCoroutine(TypeLabel("目")));  // MakingManagerから呼ぶ！
+        MakingManager.instance.StartCoroutine(TypeLabel("Eye")));  // MakingManagerから呼ぶ！
     }
 
     IEnumerator TypeLabel(string text)
