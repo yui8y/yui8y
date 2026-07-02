@@ -97,7 +97,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         nameText.text = currentNode.speaker;
-
         fullText = currentNode.text;
 
         StopAllCoroutines();

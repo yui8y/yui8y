@@ -72,7 +72,7 @@ public class CounterInteraction : MonoBehaviour
         // このカウンターで開始した会話だけ反応
         if (!hasStartedTalk) return;
 
-        hasStartedTalk = false;
+        //hasStartedTalk = false;
 
         if (!string.IsNullOrEmpty(nextSceneName))
         {
