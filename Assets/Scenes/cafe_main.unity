@@ -202,6 +202,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 861097662}
   nameText: {fileID: 496648537}
   messageText: {fileID: 1905006993}
+  currentTalk: {fileID: 0}
   typingSpeed: 0.05
 --- !u!4 &365045718
 Transform:

@@ -11,7 +11,7 @@ public class TalkData
 {
     public string speaker;
 
-    [TextArea(2,5)]
+    [TextArea(2,3)]
     public string message;
 }
 }

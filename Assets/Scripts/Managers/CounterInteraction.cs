@@ -1,43 +1,43 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
 public class CounterInteraction : MonoBehaviour
 {
-
+    [Header("会話開始ノードID")]
     public string startNodeId;
-    bool playerNear = false;
-    bool hasStartedTalk = false;  // 一度会話を始めたかのフラグ
-    public string nextSceneName;  // Inspectorで遷移先シーン名を入力する  
+
+    [Header("会話終了後に遷移するシーン")]
+    public string nextSceneName;
+
+    private bool playerNear = false;
+    private bool hasStartedTalk = false;
 
     void Update()
     {
-        if(playerNear &&
-            !hasStartedTalk &&                              // まだ会話してないとき
-            !DialogueManager.instance.IsTalking &&          // 会話中じゃないとき
-            Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            hasStartedTalk = true;                          // 会話開始フラグを立てる
-            DialogueNode node = CSVLoader.GetNode(startNodeId);
-            DialogueManager.instance.StartTalk(node);
-        }
-    }
-    System.Collections.IEnumerator StartTalkNextFrame()
-    {
-        yield return null;  // 1フレーム待つ（EndTalkが完全に終わるのを待つ）
+        if (!playerNear) return;
 
-        // 待った後もまだ会話中じゃなければ開始
-        if (!DialogueManager.instance.IsTalking)
+        if (hasStartedTalk) return;
+
+        if (DialogueManager.instance.IsTalking) return;
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             DialogueNode node = CSVLoader.GetNode(startNodeId);
+
+            if (node == null)
+            {
+                Debug.LogError($"開始ノード '{startNodeId}' が見つかりません！");
+                return;
+            }
+
+            hasStartedTalk = true;
             DialogueManager.instance.StartTalk(node);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerNear = true;
         }
@@ -45,27 +45,38 @@ public class CounterInteraction : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerNear = false;
         }
     }
 
-
     void OnEnable()
     {
-        // 会話終了イベントに処理を登録する
-        DialogueManager.instance.onEndTalk += OnDialogueEnd;
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.onEndTalk += OnDialogueEnd;
+        }
     }
 
     void OnDisable()
     {
-        // 登録を解除する（メモリリーク防止）
-        DialogueManager.instance.onEndTalk -= OnDialogueEnd;
-    }  
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.onEndTalk -= OnDialogueEnd;
+        }
+    }
+
     void OnDialogueEnd()
     {
-        if (!hasStartedTalk) return;  // この会話台じゃない場合はスキップ
-        SceneTransition.instance.FadeToScene(nextSceneName);  // フェード開始
+        // このカウンターで開始した会話だけ反応
+        if (!hasStartedTalk) return;
+
+        hasStartedTalk = false;
+
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            SceneTransition.instance.FadeToScene(nextSceneName);
+        }
     }
 }

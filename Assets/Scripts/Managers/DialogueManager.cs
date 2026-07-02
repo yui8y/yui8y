@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -7,112 +7,156 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
+    [Header("UI")]
     public GameObject dialoguePanel;
-
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI messageText;
 
-    private DialogueNode currentNode;        // 今表示中のノード
-    private string fullText;                 // タイプライター用の全文保持
-
-    // 会話終了時に発火するイベント
-    public System.Action onEndTalk;
-
+    [Header("Type Writer")]
     public float typingSpeed = 0.05f;
 
-    bool isTyping = false;
-    bool isTalking = false;
-    public bool IsTalking
+    // 現在表示中のノード
+    private DialogueNode currentNode;
+
+    // タイプライター用
+    private string fullText;
+    private bool isTyping = false;
+
+    // 会話中か
+    private bool isTalking = false;
+    public bool IsTalking => isTalking;
+
+    // 会話終了イベント
+    public System.Action onEndTalk;
+
+    void Awake()
     {
-        get { return isTalking; }
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        dialoguePanel.SetActive(false);
     }
 
-    //文字テキスト
-    System.Collections.IEnumerator TypeSentence(string sentence)
+    void Update()
+    {
+        if (!isTalking) return;
+
+        bool advanceInput =
+            Keyboard.current.eKey.wasPressedThisFrame ||
+            Keyboard.current.spaceKey.wasPressedThisFrame ||
+            Mouse.current.leftButton.wasPressedThisFrame;
+
+        if (!advanceInput) return;
+
+        // タイプ中なら全文表示
+        if (isTyping)
+        {
+            StopAllCoroutines();
+            messageText.text = fullText;
+            isTyping = false;
+            return;
+        }
+
+        NextLine();
+    }
+
+    /// <summary>
+    /// 会話開始
+    /// </summary>
+    public void StartTalk(DialogueNode startNode)
+    {
+        if (startNode == null)
+        {
+            Debug.LogError("開始ノードがありません！");
+            return;
+        }
+
+        currentNode = startNode;
+        isTalking = true;
+
+        dialoguePanel.SetActive(true);
+
+        ShowLine();
+    }
+
+    /// <summary>
+    /// 現在のノード表示
+    /// </summary>
+    void ShowLine()
+    {
+        if (currentNode == null)
+        {
+            EndTalk();
+            return;
+        }
+
+        nameText.text = currentNode.speaker;
+
+        fullText = currentNode.text;
+
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(fullText));
+    }
+
+    IEnumerator TypeSentence(string sentence)
     {
         isTyping = true;
-
         messageText.text = "";
 
-        foreach(char c in sentence)
+        foreach (char c in sentence)
         {
             messageText.text += c;
-
             yield return new WaitForSeconds(typingSpeed);
         }
 
         isTyping = false;
     }
 
-    void Awake()
-    {
-        instance = this;
-    }
-
-    void Update()
-    {
-        // E・スペース・クリックのどれかを判定
-        bool isAdvanceInput =
-            Keyboard.current.eKey.wasPressedThisFrame
-            || Keyboard.current.spaceKey.wasPressedThisFrame
-            || Mouse.current.leftButton.wasPressedThisFrame;
-
-        if (isTalking && isAdvanceInput)
-        {
-            if (isTyping)
-            {
-                // タイピング中なら全文スキップ表示
-                StopAllCoroutines();
-                messageText.text = fullText;  // currentTalk→fullTextに変更
-                isTyping = false;
-                return;
-            }
-
-            NextLine();
-        }
-    }
-
-    public void StartTalk(DialogueNode startNode)
-    {
-        currentNode = startNode;   // 最初のノードをセット
-        isTalking = true;
-        dialoguePanel.SetActive(true);
-        ShowLine();
-    }
-
-    void ShowLine()
-    {
-        nameText.text = currentNode.speaker;  // 話者名をセット
-        fullText = currentNode.text;          // 全文を保持しておく
-
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(fullText)); // タイプライター開始
-    }
-
+    /// <summary>
+    /// 次のノードへ
+    /// </summary>
     void NextLine()
     {
-        // nextNodeIdがnullか"null"なら会話終了
-        if (string.IsNullOrEmpty(currentNode.nextNodeId) 
-            || currentNode.nextNodeId == "null")
+        if (string.IsNullOrEmpty(currentNode.nextNodeId) ||
+            currentNode.nextNodeId == "null")
         {
             EndTalk();
             return;
         }
 
-        // CSVLoaderから次のノードを取得して進む
-        currentNode = CSVLoader.GetNode(currentNode.nextNodeId);
-        Debug.Log("次のノード: " + currentNode?.nodeId); // 追加、nullなら"null"と表示される
+        DialogueNode nextNode = CSVLoader.GetNode(currentNode.nextNodeId);
+
+        if (nextNode == null)
+        {
+            Debug.LogWarning($"NodeID [{currentNode.nextNodeId}] が見つかりません。");
+            EndTalk();
+            return;
+        }
+
+        currentNode = nextNode;
         ShowLine();
     }
 
+    /// <summary>
+    /// 会話終了
+    /// </summary>
     void EndTalk()
     {
+        StopAllCoroutines();
+
+        isTyping = false;
         isTalking = false;
 
         dialoguePanel.SetActive(false);
 
-        onEndTalk?.Invoke();  // 登録されてる処理があれば呼ぶ（なければ何もしない）
+        onEndTalk?.Invoke();
 
-        Debug.Log("会話終了！ isTalking = " + isTalking);
+        Debug.Log("会話終了");
     }
 }
