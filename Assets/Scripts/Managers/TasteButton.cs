@@ -46,8 +46,11 @@ public class TasteButton : MonoBehaviour,
         CoffeeMakingManager.instance.HideTooltip();  // 共通ツールチップを隠す
     }
 
+    
+
     public void OnPointerClick(PointerEventData eventData)
     {
+        CoffeeMakingManager.instance.MakeCoffee();
         if (isTaste)
         {
             CoffeeMakingManager.instance.SelectTaste(optionId);  // 味として登録

@@ -35,14 +35,9 @@ public class CoffeeMakingManager : MonoBehaviour
                 new Vector3(mousePos.x, mousePos.y, 10f)
             );
 
-            tooltipTransform.position = mouseWorldPos + new Vector3(0.3f, 0.3f, 0f);
+            tooltipTransform.position = mouseWorldPos + new Vector3(0.6f, -0.7f, 0f);
 
-            // マウススクリーン座標をワールド座標に変換
-            // Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(
-            //     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f)  // Zは画面からの距離
-            // );
-
-            // tooltipTransform.position = mouseWorldPos + new Vector3(0.3f, 0.3f, 0); // 少しオフセット
+            
         }
     }
 
@@ -80,5 +75,33 @@ public class CoffeeMakingManager : MonoBehaviour
     {
         currentSelection.isHot = isHot;             // ホット/アイスを記録
         Debug.Log("温度選択: " + (isHot ? "ホット" : "アイス"));
+    }
+
+    // コーヒーを作る
+    public void MakeCoffee()
+    {
+        // 必須項目が選ばれているか確認
+        if (string.IsNullOrEmpty(currentSelection.selectedTaste))
+        {
+            Debug.Log("味を選んでね！");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(currentSelection.selectedAroma))
+        {
+            Debug.Log("香りを選んでね！");
+            return;
+        }
+
+        Debug.Log("===== コーヒー完成！ =====");
+        Debug.Log("味：" + currentSelection.selectedTaste);
+        Debug.Log("香り：" + currentSelection.selectedAroma);
+        Debug.Log("温度：" + (currentSelection.isHot ? "ホット" : "アイス"));
+
+        // ↓ここで実際のコーヒーを生成
+        // CoffeeDatabaseから検索
+        // お客さんに渡す
+        // アニメーション
+        // シーン遷移
     }
 }
