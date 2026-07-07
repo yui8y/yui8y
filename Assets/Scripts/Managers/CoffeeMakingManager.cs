@@ -12,6 +12,8 @@ public class CoffeeMakingManager : MonoBehaviour
 
     public GameObject tooltipPanel;       // 共通のツールチップパネル
     public TextMeshProUGUI tooltipText;   // 共通のツールチップテキスト
+
+    public TextMeshProUGUI Tooltip_title;  // 共通のツールチップタイトル
     public Transform tooltipTransform;
 
     public Canvas parentCanvas;           // 親のCanvas
@@ -42,9 +44,10 @@ public class CoffeeMakingManager : MonoBehaviour
     }
 
     // ボタン側から呼ぶ：ツールチップを表示
-    public void ShowTooltip(string text)
+    public void ShowTooltip(string text, string Id)
     {
         tooltipText.text = text;       // テキストをセット
+        Tooltip_title.text = Id;    // IDをセット
         tooltipPanel.SetActive(true);  // 表示
         isHovering = true;             // 追従開始
     }

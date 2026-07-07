@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: KILI
+  m_text: COFFEE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b070d823debb214d9b03ffc2959e2fd, type: 2}
   m_sharedMaterial: {fileID: -3940360645333575036, guid: 9b070d823debb214d9b03ffc2959e2fd, type: 2}
@@ -3137,6 +3137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoffeeMakingManager
   tooltipPanel: {fileID: 278935069}
   tooltipText: {fileID: 2022726307}
+  Tooltip_title: {fileID: 288428365}
   tooltipTransform: {fileID: 278935070}
   parentCanvas: {fileID: 915698089}
 --- !u!1 &1627014146
@@ -4113,7 +4114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B3\u30FC\u30D2\u30FC\u304C\u540D\u7523\u306E\u56FD\u3001\u30AD\u30EA\u30AD\u30EA\u304B\u3089\u76F4\u9001\u306E\u8C46\n\u5473\u3082\u9178\u5473\u3082\u7A0B\u3088\u304F\u98F2\u307F\u3084\u3059\u3044\u3001\u738B\u9053\u306E\u5473\u3002"
+  m_text: "\u30C6\u30AD\u30B9\u30C8\u30C6\u30AD\u30B9\u30C8\u30C6\u30AD\u30B9\u30C8\u30C6\u30AD\u30B9\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b070d823debb214d9b03ffc2959e2fd, type: 2}
   m_sharedMaterial: {fileID: -3940360645333575036, guid: 9b070d823debb214d9b03ffc2959e2fd, type: 2}
