@@ -1,0 +1,4 @@
+charId, partId, partName, requiredAffinity, hoverText, startNodeID
+npc_01, eye, 目, 0, 桃色の瞳。目線は合わない。, node_002
+npc_01, hair, 髪, 20, さらさらしていて艶がある。手入れが行き届いている。, node_006
+npc_01, clothes, 服, 40, よく見ると、何かを溢したシミが見える。, node_007
