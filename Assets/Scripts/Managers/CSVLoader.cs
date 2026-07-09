@@ -33,7 +33,7 @@ public class CSVLoader : MonoBehaviour
         {
             string[] cols = lines[i].Split(',');  // カンマで列に分割
 
-            if (cols.Length < 8) continue;        // 列数が足りない行はスキップ
+            if (cols.Length < 9) continue;        // 列数が足りない行はスキップ
 
             string nodeId  = cols[0].Trim();      // ノードID
             string charId  = cols[1].Trim();      // キャラID
@@ -43,6 +43,7 @@ public class CSVLoader : MonoBehaviour
             string kwType  = cols[5].Trim();      // キーワード種類
             int affinity   = int.Parse(cols[6].Trim()); // 好感度変動
             string nextId  = cols[7].Trim();      // 次のノードID
+            string eventId = cols[8].Trim();      // 特別な選択肢の場合のノードID
 
             // このnodeIdのノードがまだ辞書にない場合は新規作成
             if (!nodeDict.ContainsKey(nodeId))
@@ -53,7 +54,8 @@ public class CSVLoader : MonoBehaviour
                     charId     = charId,
                     speaker    = speaker,
                     text       = text,
-                    nextNodeId = nextId
+                    nextNodeId = nextId,
+                    nextNodeId_event = eventId
                 };
             }
 
@@ -63,7 +65,8 @@ public class CSVLoader : MonoBehaviour
                 word          = kwWord,
                 type          = ParseKeywordType(kwType), // 文字列→enumに変換
                 affinityChange = affinity,
-                nextNodeId    = nextId
+                nextNodeId    = nextId,
+                nextNodeId_event = eventId
             };
 
             nodeDict[nodeId].keywords.Add(kw);  // ノードのキーワードリストに追加

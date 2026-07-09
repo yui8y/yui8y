@@ -9,6 +9,8 @@ public class DialogueNode
     public string speaker;          // 話者名（表示用）
     public string text;             // 会話テキスト
     public string nextNodeId;       // 次のノードID（nullなら会話終了）
+    public string nextNodeId_event; // キーワード選択を行った場合のイベントノード
+
     public List<KeywordData> keywords = new List<KeywordData>(); // キーワードリスト
 }
 
@@ -19,7 +21,8 @@ public class KeywordData
     public string word;             // キーワードの単語
     public KeywordType type;        // キーワードの種類
     public int affinityChange;      // 好感度の変動値
-    public string nextNodeId;       // この単語選択時の次ノード
+    public string nextNodeId;       // 次のノードID（nullなら会話終了）
+    public string nextNodeId_event; // キーワード選択を行った場合のイベントノード
 }
 
 // キーワードの種類

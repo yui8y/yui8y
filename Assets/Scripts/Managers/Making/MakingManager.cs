@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 
@@ -8,6 +9,16 @@ public class MakingManager : MonoBehaviour
     public static MakingManager instance;
     public SpriteRenderer overlayImage;  // InspectorでOverlayのImageをセット
     public GameObject[] annotationParts;
+    public bool isTooltipOpen = false;  // TooltipPanel表示中かどうか
+    public GameObject currentTooltipPanel;  // 今開いてるTooltipPanelを記憶
+
+    public AnnotationPart currentAnnotationPart;  // 今開いてるAnnotationPartを記憶
+
+    public bool firstcontact = true;    // 初めての会話の場合、イベント発火用
+
+    public string startNodeId;  // 会話開始ノードID
+
+
 
 
     // フェーズの種類
@@ -29,6 +40,29 @@ public class MakingManager : MonoBehaviour
         //EnterAnalysisPhase();  // シーン開始時に分析フェーズから始める
         overlayImage.color = new Color(0.04f, 0.08f, 0.2f, 0f);  // 最初は透明
         SceneTransition.instance.onFadeInComplete += OnFadeInComplete;
+    }
+
+    void Update()
+    {
+        // TooltipPanel表示中にTooltipPanel以外をクリックしたら閉じる
+        if (isTooltipOpen && 
+            currentAnnotationPart != null &&
+            Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(
+                Mouse.current.position.ReadValue()
+            );
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            Debug.Log("クリック検知！ hit: " + (hit.collider != null ? hit.collider.name : "null"));
+
+            // TooltipPanel内のオブジェクトじゃなければ閉じる
+            if (hit.collider == null ||
+                !hit.collider.transform.IsChildOf(currentTooltipPanel.transform))
+            {
+                currentAnnotationPart.CloseTooltip();  // 直接呼ぶ！
+            }
+        }
     }
 
     // 分析フェーズに入る
@@ -53,14 +87,27 @@ public class MakingManager : MonoBehaviour
 
     void OnFadeInComplete()
     {
+        if (firstcontact)
+        {
+            currentPhase = Phase.Dialogue;
+            DialogueNode node = CSVLoader.GetNode(startNodeId);
+            DialogueManager.instance.onEndTalk += OnIntroDialogueEnd;
+            DialogueManager.instance.StartTalk(node);
+        }
+    }
 
-        // 部位ごとに0.1秒ずつタイミングをずらして表示
+    void OnIntroDialogueEnd()
+    {
+        // 二重発火防止のため解除
+        DialogueManager.instance.onEndTalk -= OnIntroDialogueEnd;
+
+        // overlayのフェードインを実行
         for (int i = 0; i < annotationParts.Length; i++)
         {
-            int index = i;  // ラムダ式内で正しいiを使うためにキャプチャ
+            int index = i;
             DOVirtual.DelayedCall(
-                i * 0.1f,                                    // i番目は i*0.1秒後に実行
-                () => annotationParts[index].SetActive(true) // 該当部位を表示
+                i * 0.1f,
+                () => annotationParts[index].SetActive(true)
             );
         }
 
@@ -71,6 +118,6 @@ public class MakingManager : MonoBehaviour
 
     void OnDisable()
     {
-        SceneTransition.instance.onFadeInComplete -= OnFadeInComplete;  // 登録解除
+        SceneTransition.instance.onFadeInComplete -= OnFadeInComplete;
     }
 }
