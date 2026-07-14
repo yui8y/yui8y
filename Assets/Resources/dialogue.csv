@@ -1,6 +1,7 @@
 nodeId, charId, speaker, text, keywordWord, keywordType, affinityChange, nextNodeId, nextNodeId_event
 node_001, npc_01, Towa, いらっしゃいませ。ご注文はいかがいたしますか?。, null, null, 0, null, null
-node_002, npc_01, Towa, あなたの目、きれいですね。カラーコンタクトでしょうか？, null, null, 0, node_003, null
+
+node_002, npc_01, Towa, 目、きれいですね。カラーコンタクトでしょうか？, null, null, 0, node_003, null
 node_003, npc_01, Mikuru, ん、ああ、目? いいでしょ。, null, null, 0, node_004, null
 node_004, npc_01, Mikuru, このカラコン、おっきいのに痛くないしチョー盛れるんだよね, null, null, 0, node_005, null
 node_005, npc_01, Mikuru, あとほら、桜みたいでかわいくない?, 桜, Nomal, 2, node_016, node_006

@@ -19,7 +19,8 @@ public class AnnotationPart : MonoBehaviour
     public GameObject tooltipPanel;        // TooltipPanel
     public TextMeshProUGUI tooltipTitle;   // TooltipTitleのTextMeshPro
     public TextMeshProUGUI tooltipText;    // TooltipTextのTextMeshPro
-    public GameObject talkButton;          // TalkButton
+
+    public TalkButton talkButton;          //talkbutton
     public string partId;                  // この部位のID
     public string charId;                  // キャラID
     bool isTooltipOpen = false;            // TooltipPanel表示中かどうか
@@ -96,6 +97,14 @@ public class AnnotationPart : MonoBehaviour
         MakingManager.instance.currentTooltipPanel = tooltipPanel;  // 今開いたパネルを記憶
         MakingManager.instance.currentAnnotationPart = this;  // 自分自身を登録
 
+        // デバッグ用：charIdが空なら仮のIDをセット
+        if(MakingManager.DebugMode == true){
+            if (string.IsNullOrEmpty(GameData.currentCharId))
+            {
+                GameData.currentCharId = "npc_01";  // テスト用のcharId
+            }
+        }
+
         AnalysisPartData data = AnalysisCSVLoader.GetPartData(
             GameData.currentCharId, partId
         );
@@ -104,7 +113,9 @@ public class AnnotationPart : MonoBehaviour
 
         tooltipTitle.text = data.partName;
         tooltipText.text = data.hoverText;
-        talkButton.GetComponent<TalkButton>()?.SetNodeId(data.startNodeId);
+        talkButton.SetNodeId(data.startNodeId);
+        //Debug.Log("SetNodeId呼んだ！");
+
 
         isTooltipOpen = !isTooltipOpen;
 
@@ -145,5 +156,10 @@ public class AnnotationPart : MonoBehaviour
             .DOScale(Vector3.zero, 0.15f)
             .SetEase(Ease.InBack)
             .OnComplete(() => tooltipPanel.SetActive(false));
+    }
+
+    public void OnButtonClicked()
+    {
+        
     }
 }

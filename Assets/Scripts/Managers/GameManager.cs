@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject dialogueUI;
     public TextMeshProUGUI dialogueText;
 
-
     
     void Awake()
     {

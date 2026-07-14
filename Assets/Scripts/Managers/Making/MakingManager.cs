@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 
 public class MakingManager : MonoBehaviour
@@ -17,6 +18,9 @@ public class MakingManager : MonoBehaviour
     public bool firstcontact = true;    // 初めての会話の場合、イベント発火用
 
     public string startNodeId;  // 会話開始ノードID
+
+    public static bool DebugMode = true;
+
 
 
 
@@ -40,6 +44,9 @@ public class MakingManager : MonoBehaviour
         //EnterAnalysisPhase();  // シーン開始時に分析フェーズから始める
         overlayImage.color = new Color(0.04f, 0.08f, 0.2f, 0f);  // 最初は透明
         SceneTransition.instance.onFadeInComplete += OnFadeInComplete;
+        if(DebugMode == true){
+            OnFadeInComplete(); //デバッグテスト用。直接呼出し
+        }
     }
 
     void Update()

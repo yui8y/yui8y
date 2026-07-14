@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Managers\CSVLoader.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\MakingManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\LabelClickHandler.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TalkButtonColider.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\AnnotationCollider.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\TalkButton.cs" />
     <Compile Include="Assets\Resources\TalkLine.cs" />

@@ -13,6 +13,7 @@ public class TalkButton : MonoBehaviour
     // ボタンクリック時に呼ぶ
     public void OnTalkButtonClicked()
     {
+        Debug.Log("TalkButtonクリック！ nodeId: " + nodeId);  // これが出るか確認
         if (string.IsNullOrEmpty(nodeId)) return;
 
         DialogueNode node = CSVLoader.GetNode(nodeId);  // ノードを取得
