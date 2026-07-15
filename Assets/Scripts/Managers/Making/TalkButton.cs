@@ -16,8 +16,8 @@ public class TalkButton : MonoBehaviour
         Debug.Log("TalkButtonクリック！ nodeId: " + nodeId);  // これが出るか確認
         if (string.IsNullOrEmpty(nodeId)) return;
 
-        DialogueNode node = CSVLoader.GetNode(nodeId);  // ノードを取得
-        DialogueManager.instance.StartTalk(node);        // 会話開始
+        //  DialogueNode node = CSVLoader.GetNode(nodeId);  // ノードを取得
+        //  DialogueManager.instance.StartTalk(node);        // 会話開始
         MakingManager.instance.EnterDialoguePhase(nodeId); // フェーズ切り替え
     }
 }

@@ -1,4 +1,4 @@
 charId, partId, partName, requiredAffinity, hoverText, startNodeID
 npc_01, eye, Eye, 0, FFDBED-サクラ色\nきれいな瞳。しかし\n常にスマホを見ているため、目が合わない。ラメ入りアイシャドウがきらきらしている。, node_002
-npc_01, hair, Hair, 0, インナーカラー。さらさらしていて艶があり、手入れが行き届いているように見える。\n染めたてのようで、色ムラが少ない。, node_006
+npc_01, hair, Hair, 0, インナーカラー。さらさらしていて艶があり、手入れが行き届いているように見える。\n染めたてのようで、色ムラが少ない。, node_024
 npc_01, clothes, Clothes, 40, よく見ると、何かを溢したシミが見える。, node_007

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\UI\OnMouseDownSwitchScene.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\CoffeeMakingManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CSVLoader.cs" />
+    <Compile Include="Assets\Scripts\Managers\DebugActive.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\MakingManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\LabelClickHandler.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\TalkButtonColider.cs" />

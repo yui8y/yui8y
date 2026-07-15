@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
+using TMPro;
+
 
 
 public class MakingManager : MonoBehaviour
@@ -20,6 +22,10 @@ public class MakingManager : MonoBehaviour
     public string startNodeId;  // 会話開始ノードID
 
     public static bool DebugMode = true;
+
+    public GameObject fadeRight;        // Fade_right
+    public GameObject tooltipPanel;     // TooltipPanel
+    public GameObject annotationLayer;  // Annotationの親オブジェクト
 
 
 
@@ -76,19 +82,64 @@ public class MakingManager : MonoBehaviour
     public void EnterAnalysisPhase()
     {
         currentPhase = Phase.Analysis;          // フェーズをAnalysisに設定
-        Debug.Log("分析フェーズ開始！charId: " + GameData.currentCharId);
-        // テスト用：とりあえずnode_002から会話を直接起動
-        //EnterDialoguePhase("node_002");
-        // ここに分析フェーズのUI表示処理を後で追加
     }
 
-    // 部位クリック時に呼ぶ。startNodeIdを渡して会話フェーズへ
+    // 部位クリック時に呼ぶ。startNodeIdを渡して会話へ
     public void EnterDialoguePhase(string startNodeId)
     {
-        currentPhase = Phase.Dialogue;          // フェーズをDialogueに設定
+        currentPhase = Phase.Dialogue;
 
-        DialogueNode node = CSVLoader.GetNode(startNodeId);  // ノードを取得
-        DialogueManager.instance.StartTalk(node);             // 会話開始
+        // フェードアウトしてから非表示にする
+        FadeOutAndHide(tooltipPanel.GetComponent<SpriteRenderer>());
+
+        // Annotationの子オブジェクトのSpriteRendererをまとめてフェード
+        foreach (SpriteRenderer sr in annotationLayer.GetComponentsInChildren<SpriteRenderer>())
+        {
+            FadeOutAndHide(sr);
+        }
+
+        // TextMeshProも別途フェードアウト
+        foreach (TextMeshPro tmp in annotationLayer.GetComponentsInChildren<TextMeshPro>())
+        {
+            tmp.DOFade(0f, 0.4f)                    // 0.4秒でアルファを0に
+                .SetEase(Ease.OutCubic)
+                .OnComplete(() =>
+                    tmp.gameObject.SetActive(false) // フェード完了後に非表示
+                );
+        }
+
+        // TooltipPanelは縮小アニメーションで消す
+        if (tooltipPanel.activeSelf)  // 表示中のときだけ実行
+        {
+            tooltipPanel.transform
+                .DOScale(Vector3.zero, 0.15f)        // 縮小
+                .SetEase(Ease.InBack)               // 逆バネで閉じる
+                .OnComplete(() =>
+                    tooltipPanel.SetActive(false)); // 完了後に非表示
+        }
+
+        // Fade_rightのフェードアウト完了後にStartTalkを呼ぶ
+        fadeRight.GetComponent<SpriteRenderer>()
+        .DOFade(0f, 0.3f)
+        .SetEase(Ease.OutCubic)
+        .OnComplete(() =>
+        {
+            fadeRight.SetActive(false);
+            DialogueNode node = CSVLoader.GetNode(startNodeId);
+            DialogueManager.instance.StartTalk(node);
+        });
+    }
+
+    // SpriteRendererをフェードアウトして非表示にするメソッド
+    void FadeOutAndHide(SpriteRenderer sr)
+    {
+        if (sr == null) return;                  // nullチェック
+
+        sr.DOFade(0f, 0.4f)                     // 0.4秒でアルファを0に
+            .SetEase(Ease.OutCubic)             // 機械的なイージング
+            .OnComplete(() =>
+                sr.gameObject.SetActive(false)  // フェード完了後に非表示
+            );
     }
 
 
