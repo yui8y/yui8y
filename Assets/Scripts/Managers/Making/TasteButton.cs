@@ -3,8 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class TasteButton : MonoBehaviour,
-    IPointerEnterHandler,
-    IPointerExitHandler,
     IPointerClickHandler
 {
     public string optionId;          // ID
@@ -18,31 +16,20 @@ public class TasteButton : MonoBehaviour,
     void Start()
     {
         selectedFrame.gameObject.SetActive(false);  // 最初は未選択状態
-        Debug.Log("起動したよ: " + optionId);
+        //Debug.Log("起動したよ: " + optionId);
     }
 
     void OnMouseEnter()
     {
-        Debug.Log("入った！");
+        //Debug.Log("入った！");
         selectedFrame.gameObject.SetActive(true);
-        CoffeeMakingManager.instance.ShowTooltip(detailText);  // 共通ツールチップに表示依頼
+        CoffeeMakingManager.instance.ShowTooltip(detailText, optionId);  // 共通ツールチップに表示依頼
     }
 
     void OnMouseExit()
     {
-        Debug.Log("出た！");
+        //Debug.Log("出た！");
         selectedFrame.gameObject.SetActive(false);
-        CoffeeMakingManager.instance.HideTooltip();  // 共通ツールチップを隠す
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        CoffeeMakingManager.instance.ShowTooltip(detailText);  // 共通ツールチップに表示依頼
-        Debug.Log("ホバー検知！: " + optionId);  // これが出るか確認
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
         CoffeeMakingManager.instance.HideTooltip();  // 共通ツールチップを隠す
     }
 
@@ -51,6 +38,7 @@ public class TasteButton : MonoBehaviour,
     public void OnPointerClick(PointerEventData eventData)
     {
         CoffeeMakingManager.instance.MakeCoffee();
+        Debug.Log("選択済み");
         if (isTaste)
         {
             CoffeeMakingManager.instance.SelectTaste(optionId);  // 味として登録

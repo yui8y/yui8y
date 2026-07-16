@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialoguePanel.SetActive(false);
+        Debug.Log("Awake: DialoguePanel非表示にした");  // 追加
     }
 
     void Update()
@@ -76,7 +77,7 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("開始ノードがありません！");
             return;
         }
-
+        Debug.Log("StartTalk呼ばれた！");
         currentNode = startNode;
         isTalking = true;
 

@@ -43,7 +43,7 @@
     <UnityVersion>6000.4.2f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\PC_User\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\山口結葉\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.2.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -51,22 +51,29 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Managers\SpawnCustomer.cs" />
     <Compile Include="Assets\Scripts\Player\Moving.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\AnalysisCSVLoader.cs" />
     <Compile Include="Assets\Resources\TalkDataSO.cs" />
-    <Compile Include="Assets\Scripts\Managers\TasteButton.cs" />
+    <Compile Include="Assets\Resources\AnalysisData.cs" />
     <Compile Include="Assets\Scripts\Managers\ComeCustomer.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CounterInteraction.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneTransition.cs" />
-    <Compile Include="Assets\Scripts\Managers\MakingManager.cs" />
     <Compile Include="Assets\Scripts\UI\make_coffee.cs" />
     <Compile Include="Assets\Resources\DialogueData.cs" />
-    <Compile Include="Assets\Scripts\UI\AnnotationPart.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\AnnotationPart.cs" />
     <Compile Include="Assets\Resources\GameData.cs" />
     <Compile Include="Assets\Scripts\UI\OnMouseDownSwitchScene.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\CoffeeMakingManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CSVLoader.cs" />
-    <Compile Include="Assets\Scripts\Managers\TastePanel.cs" />
+    <Compile Include="Assets\Scripts\Managers\DebugActive.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\MakingManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\LabelClickHandler.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TalkButtonColider.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\AnnotationCollider.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TalkButton.cs" />
     <Compile Include="Assets\Resources\TalkLine.cs" />
-    <Compile Include="Assets\Scripts\Managers\CoffeeMakingManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TastePanel.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TasteButton.cs" />
     <Compile Include="Assets\Resources\CoffeeData.cs" />
     <Compile Include="Assets\Scripts\Managers\TextController.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogueManager.cs" />
