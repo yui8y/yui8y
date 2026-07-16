@@ -50,9 +50,7 @@ public class DialogueManager : MonoBehaviour
 
         bool advanceInput =
             Keyboard.current.eKey.wasPressedThisFrame ||
-            Keyboard.current.spaceKey.wasPressedThisFrame ||
-            Mouse.current.leftButton.wasPressedThisFrame;
-
+            Keyboard.current.spaceKey.wasPressedThisFrame;
         if (!advanceInput) return;
 
         // タイプ中なら全文表示
