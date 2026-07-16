@@ -1,51 +1,48 @@
 nodeId, charId, speaker, text, keywordWord, keywordType, affinityChange, nextNodeId, nextNodeId_event
-node_001, 01, Towa, いらっしゃいませ。ご注文はいかがいたしますか?。, null, null, 0, null, null
-
+node_001, 01, Towa, "いらっしゃいませ。ご注文はいかがいたしますか?", null, null, 0, null, null
 node_002, 01, Towa, 目、きれいですね。カラーコンタクトでしょうか?, null, null, 0, node_003, null
-node_003, 01, Mikuru, ん、ああ、目? いいでしょ。, null, null, 0, node_004, null
-node_004, 01, Mikuru, このカラコン、おっきいのに痛くないしチョー盛れるんだよね, null, null, 0, node_005, null
-node_005, 01, Mikuru, あとほら、桜みたいでかわいくない?, 桜, Nomal, 2, node_016, node_006
+node_003, npc_01, Mikuru, ん、ああ、目? いいでしょ。, null, null, 0, node_004, null
+node_004, npc_01, Mikuru, このカラコン、おっきいのに痛くないしチョー盛れるんだよね, null, null, 0, node_005, null
+node_005, npc_01, Mikuru, あとほら、桜みたいでかわいくない?, 桜, Normal, 2, node_016, node_006
 node_006, 01, Towa, サクラ、ですか?, null, null, 0, node_007, null
-node_007, 01, Mikuru, そ。ほら、春に咲く、ピンクのアレ。, null, null, 0, node_008, null
-node_008, 01, Mikuru, ……待って。もしかして、桜を知らない感じ?, null, null, 0, node_009, null
+node_007, npc_01, Mikuru, そ。ほら、春に咲く、ピンクのアレ。, null, null, 0, node_008, null
+node_008, npc_01, Mikuru, ……待って。もしかして、桜を知らない感じ?, null, null, 0, node_009, null
 node_009, 01, Towa, 私が生産されたのは今年の7月ですので、実物はまだ記録にございません。, null, null, 0, node_010, null
-node_010, 01, Mikuru, む、もしかして難しい話だな?, null, null, 0, node_011, null
-node_011, 01, Mikuru, まーとにかく、じゃあ春は楽しみだね。, null, null, 0, node_012, null
+node_010, npc_01, Mikuru, む、もしかして難しい話だな?, null, null, 0, node_011, null
+node_011, npc_01, Mikuru, まーとにかく、春を知らないなんて人生8割損してるよ!, null, null, 0, node_012, null
 node_012, 01, Towa, そうですか?, null, null, 0, node_013, null
-node_013, 01, Mikuru, 桜いっぱいだし、キカゲンで出てくる桜味は全部おいしいし。お菓子食べてもカロリーゼロだし。, キカゲン, Critical, 10, node_014, node_018
+node_013, npc_01, Mikuru, 桜いっぱいだし、キカゲンで出てくる桜味は全部おいしいし。お菓子食べてもカロリーゼロだし。, キカゲン, Critical, 10, node_014, node_018
 node_014, 01, Towa, ……それは、単に春のお菓子が食べたいだけでは, null, null, 0, node_015, null
-node_015, 01, Mikuru, あ、ばれた?　しょーがないじゃん、美味しいのがいけない。, null, null, 0, node_016, null
-node_016, 01, Mikuru, ……ま、そんなことより。さっさとコーヒー出してよ。, null, null, 0, null, null
-node_017, 01, Towa, かしこまりました。, null, null, null, null
+node_015, npc_01, Mikuru, あ、ばれた?　しょーがないじゃん、美味しいのがいけない。, null, null, 0, node_016, null
+node_016, npc_01, Mikuru, ……ま、そんなことより。さっさとコーヒー出してよ。, null, null, 0, null, null
+node_017, 01, Towa, かしこまりました。, null, null, 0, null, null
 node_018, 01, Towa, キカゲン? というのは、「期間限定」という意味でしょうか。, null, null, 0, node_019, null
-node_019, 01, Mikuru, そ! えすご、よく分かったね!, null, null, 0, node_020, null
-node_020, 01, Mikuru, やっぱり高性能のAI? だっけ? ってスゴいんだねぇ, null, null, 0, node_021, null
-node_021, 01, Mikuru, ねえここでもやってよ、キカゲン。めちゃ甘いやつがいい。, null, null, 0, node_022, null
-node_022, npc_02, Towa, まあ、では。検討はさせていただきます。, null, null, 0, node_023, null
-node_023, npc_02, Towa, おっ言ったね? じゃー楽しみにしてるよ。, null, null, 0, null, null
-
+node_019, npc_01, Mikuru, そ! えすご、よく分かったね!, null, null, 0, node_020, null
+node_020, npc_01, Mikuru, やっぱり高性能のAI? だっけ? ってスゴいんだねぇ, null, null, 0, node_021, null
+node_021, npc_01, Mikuru, ねえここでもやってよ、キカゲン。めちゃ甘いやつがいい。, null, null, 0, node_022, null
+node_022, 01, Towa, まあ、では。検討はさせていただきます。, null, null, 0, node_023, null
+node_023, npc_01, Mikuru, おっ言ったね? じゃー楽しみにしてるよ。, null, null, 0, null, null
 node_024, 01, Towa, インナーカラー、きれいですね。, null, null, 0, node_025, null
-node_025, npc_02, Mikuru, おっ、分かる?　最近ブリーチかけたんだよね, null, null, 0, node_026, null
+node_025, npc_01, Mikuru, おっ、分かる?　最近ブリーチかけたんだよね, null, null, 0, node_026, null
 node_026, 01, Towa, はい。よく手入れされていると見受けられます, null, null, 0, node_027, null
-node_027, npc_02, Mikuru, んふふ、ほめ上手ぅ。 最近のコってそんなことまで言ってくれるんだ, 最近のコ, Dislike, -1, node_033, node_028
+node_027, npc_01, Mikuru, んふふ、ほめ上手ぅ。 最近のコってそんなことまで言ってくれるんだ, 最近のコ, Dislike, -1, node_033, node_npc_018
 node_028, 01, Towa, ……最近の、ということは、以前にも私の系列機種とお会いしたことがあるんですね, null, null, 0, node_029, null
-node_029, npc_02, Mikuru, ん～、そうかなぁ……ま、そうなるのかなぁ, null, null, 0, node_030, null
-node_030, npc_02, Mikuru, "キミと同じコ"じゃないけど、"前の子"には、会ったことあるよ。, null, null, 0, node_030, null
-node_031, npc_02, Mikuru, ここじゃないけど。いい子だった, null, null, 0, node_031, null
-node_032, 01, Towa, そうでしたか。, null, null, 0, null, null
-node_033, 01, Towa, あなたの髪を分析し、判断したまでです。, null, null, 0, node_034, null
-node_034, npc_02, Mikuru, おぉ、さっすがぁ!, null, null, 0, node_035, null
-node_035, npc_02, Mikuru, じゃあさ、今度来た時とかに「私、どこ変わったでしょう?」とか聞いても答えてくれるの?, null, null, 0, node_036, null
-node_036, 01, Towa, はい、あなたはこのカフェの常連客だとデータにございますので。, null, null, 0, node_037, null
-node_037, 01, Towa, 次回ご来店いただいた際に声をかけていただければ、データを参照してお答えいたします。, null, null, 0, node_038, null
-node_038, npc_02, Mikuru, やった! じゃー楽しみにしてるね, null, null, 0, null, null
-
-node_cafe1, 01, Mikuru, ありがとーございます。, null, null, 0, null, null
-node_cafe2, 01, Mikuru, ありがと、じゃね。, null, null, 0, null, null
-node_cafe3, 01, Mikuru, お任せコーヒー、よろしく。, null, null, 0, null, null
-node_cafe4, 01, Mikuru, いつもの! ……なーんちゃって。ちょっと言ってみたかっただけ。, null, null, 30, null, null
-
-node_ev1, 01, Towa, ミクル様、でよろしかったでしょうか?, null, null, 0, node_ev2, null
-node_ev2, 01, Mikuru, お、ニューフェイスじゃん。, null, null, 0, node_ev3, null
-node_ev3, 01, Mikuru, そだよ。あたしがミクル。いつものお任せコーヒー、よろしく, null, null, 0, node_ev4, null
-node_ev4, 01, Towa, かしこまりました。, null, null, 0, null, null
+node_029, npc_01, Mikuru, ん～、そうかなぁ……ま、そうなるのかなぁ, null, null, 0, node_030, null, null
+node_030, npc_01, Mikuru, 「キミと同じコ」じゃないけど、「前の子」には、会ったことあるよ。, null, null, 0, node_031, null, null
+node_031, npc_01, Mikuru, ここじゃないけど。いい子だった, null, null, 0, node_032, null, null
+node_032, 01, Towa, そうでしたか。, null, null, 0, null, null, null
+node_033, 01, Towa, あなたの髪を分析し、判断したまでです。, null, null, 0, node_034, null, null
+node_034, npc_01, Mikuru, おぉ、さっすがぁ!, null, null, 0, node_035, null, null
+node_035, npc_01, Mikuru, じゃあさ、今度来た時とかに「私、どこ変わったでしょう?」とか聞いても答えてくれるの?, null, null, 0, node_036, null, null
+node_036, 01, Towa, はい、あなたはこのカフェの常連客だとデータにございますので。, null, null, 0, node_037, null, null
+node_037, 01, Towa, 次回ご来店いただいた際に声をかけていただければ、データを参照してお答えいたします。, null, null, 0, node_038, null, null
+node_038, npc_01, Mikuru, やった! じゃ、また気が向いたら染めてくるねー, null, null, 0, node_039, null, null
+node_039, npc_01, Mikuru, ま、おカネないし、しばらくはこの色だけどねぇ, null, null, 0, null, null, null
+node_cafe1, 01, Mikuru, ありがとーございます。, null, null, 0, null, null, null
+node_cafe2, 01, Mikuru, ありがと、じゃね。, null, null, 0, null, null, null
+node_cafe3, 01, Mikuru, お任せコーヒー、よろしく。, null, null, 0, null, null, null
+node_cafe4, 01, Mikuru, いつもの! ……なーんちゃって。ちょっと言ってみたかっただけ。, null, null, 30, null, null, null
+node_ev1, 01, Towa, ミクル様、でよろしかったでしょうか?, null, null, 0, node_ev2, null, null
+node_ev2, 01, Mikuru, お、ニューフェイスじゃん。, null, null, 0, node_ev3, null, null
+node_ev3, 01, Mikuru, そだよ。あたしがミクル。いつものお任せコーヒー、よろしく, null, null, 0, node_ev4, null, null
+node_ev4, 01, Towa, かしこまりました。, null, null, 0, null, null, null

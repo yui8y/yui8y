@@ -5,7 +5,7 @@ using System.Collections.Generic;  // Listを使うために必要
 public class DialogueNode
 {
     public string nodeId;           // ノードの識別子（例: node_001）
-    public string charId;           // キャラID（例: npc_a）
+    public string charId;           // キャラID（例: 01）
     public string speaker;          // 話者名（表示用）
     public string text;             // 会話テキスト
     public string nextNodeId;       // 次のノードID（nullなら会話終了）
