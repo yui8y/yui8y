@@ -2,58 +2,65 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class TasteButton : MonoBehaviour,
-    IPointerClickHandler
+public class TasteButton : MonoBehaviour
 {
-    public string optionId;          // ID
+    public string optionId;          // 豆の名称ID
     public string detailText;        // ホバー時の詳細説明
 
     public SpriteRenderer iconImage;          // 豆のアイコンImage
     public SpriteRenderer selectedFrame;      // 選択中を示す枠
 
-    public bool isTaste = true;      // true=味ボタン, false=香りボタン
+    public bool isBeans = true;      // true=豆ボタン, false=香りボタン
+    public bool isSelected = false;  //選択状態かどうか
 
     void Start()
     {
         selectedFrame.gameObject.SetActive(false);  // 最初は未選択状態
         //Debug.Log("起動したよ: " + optionId);
+        isSelected = false;  // 初期化
     }
 
     void OnMouseEnter()
     {
-        //Debug.Log("入った！");
-        selectedFrame.gameObject.SetActive(true);
-        CoffeeMakingManager.instance.ShowTooltip(detailText, optionId);  // 共通ツールチップに表示依頼
+        Debug.Log("ホバー！ isSelected: " + isSelected + " selectedFrame: " + selectedFrame);
+        if (!isSelected)
+        {
+            selectedFrame.gameObject.SetActive(true);
+        }
+        CoffeeMakingManager.instance.ShowTooltip(detailText, optionId);
     }
 
     void OnMouseExit()
     {
-        //Debug.Log("出た！");
-        selectedFrame.gameObject.SetActive(false);
-        CoffeeMakingManager.instance.HideTooltip();  // 共通ツールチップを隠す
+        if (!isSelected)  // 未選択のときだけホバー枠を消す
+        {
+            selectedFrame.gameObject.SetActive(false);
+        }
+        CoffeeMakingManager.instance.HideTooltip();
     }
 
-    
-
-    public void OnPointerClick(PointerEventData eventData)
+    void OnMouseDown()
     {
+        isSelected = true;                    // 選択状態にする
+        selectedFrame.gameObject.SetActive(true);  // 枠を固定表示
+
         CoffeeMakingManager.instance.MakeCoffee();
-        Debug.Log("選択済み");
-        if (isTaste)
+        if (isBeans)
         {
-            CoffeeMakingManager.instance.SelectTaste(optionId);  // 味として登録
+            CoffeeMakingManager.instance.SelectTaste(optionId);
         }
         else
         {
-            CoffeeMakingManager.instance.SelectAroma(optionId);  // 香りとして登録
+            CoffeeMakingManager.instance.SelectFlavor(optionId);
         }
 
-        // 同じパネル内の他のボタンの選択枠を消す
         transform.parent.GetComponent<TastePanel>()?.SelectButton(this);
     }
 
     public void SetSelected(bool selected)
     {
-        selectedFrame.gameObject.SetActive(selected);  // 選択枠の表示切り替え
+        Debug.Log(optionId + " SetSelected呼ばれた: " + selected);  // 追加
+        isSelected = selected;
+        selectedFrame.gameObject.SetActive(selected);
     }
 }
