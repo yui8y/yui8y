@@ -3,14 +3,12 @@ using UnityEngine.InputSystem;
 
 public class CounterInteraction : MonoBehaviour
 {
-    [Header("会話開始ノードID")]
     public string startNodeId;
 
-    [Header("会話終了後に遷移するシーン")]
     public string nextSceneName;
 
     private bool playerNear = false;
-    private bool hasStartedTalk = false;
+    public static bool hasStartedTalk = false;
 
     void Update()
     {
@@ -20,7 +18,7 @@ public class CounterInteraction : MonoBehaviour
 
         if (DialogueManager.instance.IsTalking) return;
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.eKey.wasPressedThisFrame && !GameData.isReturningFromMaking)
         {
             DialogueNode node = CSVLoader.GetNode(startNodeId);
 
@@ -37,7 +35,8 @@ public class CounterInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        Debug.Log("TriggerEnter: " + other.tag);
+        if (other.CompareTag("Customer"))
         {
             playerNear = true;
         }
@@ -45,7 +44,7 @@ public class CounterInteraction : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Customer"))
         {
             playerNear = false;
         }
@@ -69,10 +68,20 @@ public class CounterInteraction : MonoBehaviour
 
     void OnDialogueEnd()
     {
-        // このカウンターで開始した会話だけ反応
-        if (!hasStartedTalk) return;
+        if(!hasStartedTalk){
+            return;
+        }
 
-        //hasStartedTalk = false;
+        if (GameData.isReturningFromMaking){
+            return;
+        }
+
+        // お客さんの位置を保存
+        GameObject customer = GameObject.FindWithTag("Customer");
+        if (customer != null)
+        {
+            ComeCustomer.SavePosition(customer.transform.position);  // 位置を保存
+        }
 
         if (!string.IsNullOrEmpty(nextSceneName))
         {

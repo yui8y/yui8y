@@ -21,14 +21,11 @@ public class MakingManager : MonoBehaviour
 
     public string startNodeId;  // 会話開始ノードID
 
-    public static bool DebugMode = true;
+    public static bool DebugMode = false;
 
     public GameObject fadeRight;        // Fade_right
     public GameObject tooltipPanel;     // TooltipPanel
     public GameObject annotationLayer;  // Annotationの親オブジェクト
-
-
-
 
 
     // フェーズの種類

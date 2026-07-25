@@ -1,2 +1,2 @@
-charId, taste_KILI, taste_MtPink, taste_AM, flavor_floral, flavor_cinnamon, flavor_fruity, successNodeId, greatSuccessNodeId, failNodeId, criticalFailNodeId
-npc_01, 60, 80, 10, 70, 40, 50, node_cafe1, node_cafe2, node_cafe3, node_cafe4
+charId, taste_KILI, taste_MtPink, taste_AM, flavor_floral, flavor_cinnamon, successNodeId, greatSuccessNodeId, failNodeId, criticalFailNodeId
+npc_01, 50, 80, 10, 70, 90, node_cafe_end1, node_cafe_end2, node_cafe_end3, node_cafe_end4

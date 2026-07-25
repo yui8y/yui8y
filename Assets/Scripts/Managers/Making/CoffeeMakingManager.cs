@@ -23,9 +23,16 @@ public class CoffeeMakingManager : MonoBehaviour
 
     public List<TasteButton> allButtons;  // 全豆・香りボタンをInspectorで登録
 
+    public GameObject serveButton;        // 提供ボタン
+
     void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
+        serveButton.SetActive(false);  // 最初は非表示
     }
 
     void Update()
@@ -66,7 +73,7 @@ public class CoffeeMakingManager : MonoBehaviour
     public void SelectTaste(string tasteId)
     {
         currentSelection.selectedTaste = tasteId;   // 選択した味を記録
-        
+        serveButton.SetActive(true); 
         Debug.Log("味選択: " + tasteId);
         
     }

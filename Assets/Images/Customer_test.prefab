@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 328962288122101671}
   m_Layer: 6
   m_Name: Customer_test
-  m_TagString: Player
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cacda5c8f0e2348b20f23a47e407c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerMove
-  target: {fileID: 0}
   speed: 2
+  visual: {fileID: 2581601261965463408}
 --- !u!61 &328962288122101671
 BoxCollider2D:
   m_ObjectHideFlags: 0
