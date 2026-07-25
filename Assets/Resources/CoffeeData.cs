@@ -13,6 +13,6 @@ public class CoffeeOption
 public class CoffeeSelection
 {
     public string selectedTaste;   // 選択した味のid
-    public string selectedAroma;   // 選択した香りのid
+    public string selectedFlavor;   // 選択した香りのid
     public bool isHot = true;      // true=ホット, false=アイス
 }

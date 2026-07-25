@@ -8,9 +8,12 @@ public class TastePanel : MonoBehaviour
     // クリックされたボタン以外の選択枠を消す（ラジオボタン式）
     public void SelectButton(TasteButton selected)
     {
+        Debug.Log("SelectButton呼ばれた！ selected: " + selected.optionId);  // 追加
         foreach (var btn in buttons)
         {
-            btn.SetSelected(btn == selected);  // クリックされたものだけtrueに
+            bool isActive = btn == selected;
+            Debug.Log(btn.optionId + " → " + isActive);  // 追加
+            btn.SetSelected(isActive);
         }
     }
 }

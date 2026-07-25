@@ -49,10 +49,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Managers\Making\TabManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SpawnCustomer.cs" />
     <Compile Include="Assets\Scripts\Player\Moving.cs" />
     <Compile Include="Assets\Scripts\Managers\Making\AnalysisCSVLoader.cs" />
     <Compile Include="Assets\Resources\TalkDataSO.cs" />
+    <Compile Include="Assets\Resources\CustomerDataLoader.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\TabButton.cs" />
+    <Compile Include="Assets\Scripts\Managers\Making\ServeButton.cs" />
     <Compile Include="Assets\Resources\AnalysisData.cs" />
     <Compile Include="Assets\Scripts\Managers\ComeCustomer.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
