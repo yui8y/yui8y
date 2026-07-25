@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {    
@@ -33,12 +34,46 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // フェードイン完了後の処理を登録
+        SceneTransition.instance.onFadeInComplete += OnFadeInComplete;
         UpdateUI();
+    }
+
+    void OnFadeInComplete()
+    {
+        if (GameData.isReturningFromMaking)
+        {
+            StartThankYouDialogue();                  // お礼ダイアログ開始
+        }
+    }
+
+    void StartThankYouDialogue()
+    {
+        DialogueNode node = CSVLoader.GetNode("node_thankyou");
+        DialogueManager.instance.StartTalk(node);
+
+        // ダイアログ終了後にお客さんを退場させる
+        DialogueManager.instance.onEndTalk += OnThankYouEnd;
+    }
+
+    void OnThankYouEnd()
+    {
+        DialogueManager.instance.onEndTalk -= OnThankYouEnd;  // 登録解除
+        ComeCustomer customer = FindAnyObjectByType<ComeCustomer>();
+        if (customer != null)
+        {
+            StartCoroutine(customer.Leave());  // 退場開始
+        }
+    }
+
+    void OnDisable()
+    {
+        SceneTransition.instance.onFadeInComplete -= OnFadeInComplete;
     }
 
     void UpdateUI()
     {
-        money_txt.text = "総資産 " + GameData.money + "円";
+        money_txt.text = "売上 " + GameData.money + "円";
     }
 
 }
